@@ -1,39 +1,43 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import 'react-native-gesture-handler';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+import HomeScreen from '@/screen/homescreen/HomeScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Total from '@/screen/Total';
+import Order from '@/screen/Order';
+import Diagram from '@/screen/Diagram';
+import ShowMore from '@/screen/ShowMore';
+const Tab = createBottomTabNavigator();
+const _layout = () => {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar hidden={false} />
+      <Tab.Navigator
+        screenOptions={{ headerShown: false }}
+      >
+        <Tab.Screen
+          name="Lệnh SX"
+          component={HomeScreen}
+        />
+        <Tab.Screen
+          name="Tổng quan"
+          component={Total}
+        />
+        <Tab.Screen
+          name="Đơn hàng"
+          component={Order} />
+        <Tab.Screen
+          name="Sơ đồ Grantt"
+          component={Diagram} />
+        <Tab.Screen
+          name="Xêm thêm"
+          component={ShowMore} />
+      </Tab.Navigator>
+    </SafeAreaView>
+  )
 }
+
+export default _layout
+
+const styles = StyleSheet.create({})
