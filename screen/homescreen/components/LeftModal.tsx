@@ -1,24 +1,47 @@
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, Switch } from 'react-native'
 import React from 'react'
 import Modal from 'react-native-modal';
 import Checkbox from 'expo-checkbox';
-import { useData } from '../useData';
+import { StatusProps, useData } from '../useData';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import ItemData from './ItemData';
 
-type LeftModalProps={
+type LeftModalProps = {
   visible: boolean,
-  changeVisible:()=> void
-
+  changeVisible: () => void
 }
 
 const LeftModal = (props: LeftModalProps) => {
-  const {visible, changeVisible}= props
-
-  const [isNotChecked, setIsNotChecked] = React.useState(false);
-  const [isDoingChecked, setIsDoingChecked] = React.useState(false);
-  const [idDoneChecked, setIsDoneChecked] = React.useState(false);
+  const { visible, changeVisible } = props
+  const [isNotChecked, setIsNotChecked] = React.useState(true);
+  const [isDoingChecked, setIsDoingChecked] = React.useState(true);
+  const [isDoneChecked, setIsDoneChecked] = React.useState(true);
   const [search, setSearch] = React.useState('');
+  const { listData } = useData()
+  const [showStatus, setShowStatus] = React.useState(true);
+  const rotation = useSharedValue(0)
+  const [data, setData] = React.useState(listData)
+  const onShowStatus = () => {
+    setShowStatus(!showStatus);
+    rotation.value = withTiming(rotation.value + 180, { duration: 300 })
+  }
 
-  const {listData}= useData()
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: `${rotation.value}deg` }],
+    };
+  });
+
+
+  React.useEffect(() => {
+    setData(listData.filter(i => {
+      return (
+        (isNotChecked && i.status === "not") ||
+        (isDoingChecked && i.status === "doing") ||
+        (isDoneChecked && i.status === "done")
+      );
+    }));
+  }, [isDoingChecked, isNotChecked, isDoneChecked]);
 
 
   return (
@@ -26,9 +49,10 @@ const LeftModal = (props: LeftModalProps) => {
       isVisible={visible}
       onBackdropPress={changeVisible}
       animationOut={"slideOutLeft"}
-      style={{ margin: 0 }}
       animationIn={"slideInLeft"}
+      style={{ margin: 0 }}
       statusBarTranslucent={true}
+      useNativeDriver
     >
 
       <View style={styles.modalContainer}>
@@ -49,20 +73,32 @@ const LeftModal = (props: LeftModalProps) => {
           </View>
 
         </View>
-        <View style={[styles.border, { paddingEnd: 15, marginTop: 8, borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }]}>
+        <View style={
+          [styles.border,
+          {
+            paddingEnd: 15,
+            marginTop: 8,
+            borderBottomRightRadius: showStatus? 0 : 8,
+            borderBottomLeftRadius: showStatus? 0 : 8
+          }]
+        }>
           <View style={[styles.row, { justifyContent: 'space-between', height: 45 }]}>
             <Image
               source={require('../../../assets/images/ChartDonut.png')}
               style={{ width: 16, height: 16 }} />
+
             <Text style={{ textAlign: 'left', flex: 1, marginLeft: 5, fontSize: 16 }}>Trạng thái</Text>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Image
-                source={require('../../../assets/images/CaretUp.png')}
-                style={{ width: 16, height: 16 }} />
-            </View>
+            <Animated.View style={[animatedStyle, { justifyContent: 'center', alignItems: 'center' }]}>
+              <TouchableOpacity onPress={onShowStatus}>
+                <Image
+                  source={require('../../../assets/images/CaretUp.png')}
+                  style={{ width: 16, height: 16 }} />
+              </TouchableOpacity>
+            </Animated.View>
           </View>
         </View>
-        <View style={[styles.border, { borderTopRightRadius: 0, borderTopLeftRadius: 0 }]}>
+        {showStatus && <View
+          style={[styles.border, { borderTopRightRadius: 0, borderTopLeftRadius: 0 }]}>
 
           <View style={[styles.row, { justifyContent: 'flex-start', height: 45 }]}>
             <Checkbox
@@ -80,18 +116,18 @@ const LeftModal = (props: LeftModalProps) => {
               onValueChange={setIsDoingChecked}
               color={isDoingChecked ? '#1760B9' : undefined}
             />
-            <Text style={[styles.textSelect, { backgroundColor: '#D8F3FD', color: '#076A94' }]}>Chưa sản xuất</Text>
+            <Text style={[styles.textSelect, { backgroundColor: '#D8F3FD', color: '#076A94' }]}>Đang sản xuất</Text>
           </View>
           <View style={[styles.row, { justifyContent: 'flex-start', height: 45 }]}>
             <Checkbox
               style={styles.checkbox}
-              value={idDoneChecked}
+              value={isDoneChecked}
               onValueChange={setIsDoneChecked}
-              color={idDoneChecked ? '#1760B9' : undefined}
+              color={isDoneChecked ? '#1760B9' : undefined}
             />
-            <Text style={[styles.textSelect, { backgroundColor: '#D7F2DB', color: '#1A7526' }]}>Chưa sản xuất</Text>
+            <Text style={[styles.textSelect, { backgroundColor: '#D7F2DB', color: '#1A7526' }]}>Đã hoàn thành</Text>
           </View>
-        </View>
+        </View>}
 
         <View style={[styles.row, styles.border, { height: 45, justifyContent: 'space-between', paddingEnd: 15, marginVertical: 10 }]}>
           <Text style={{ fontSize: 16, color: '#11315B', fontWeight: '600' }}>Bỏ ghim toàn bộ</Text>
@@ -102,40 +138,12 @@ const LeftModal = (props: LeftModalProps) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={listData}
+          extraData={isNotChecked}
+          data={data}
           keyExtractor={(item) => item.lsxId}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View>
-              <View style={{ flexDirection: "row", padding: 5, paddingEnd: 10, backgroundColor: "#F3F8FE" }}>
-                <View style={{ height: '100%', width: 5, marginEnd: 5, borderBottomLeftRadius: 8, borderTopLeftRadius: 8, backgroundColor: "#0375F4" }}></View>
-                <View>
-                  <View style={{ justifyContent: "space-between", flexDirection: 'row' }}>
-                    <Text style={[getStatusStyle(item.status), { fontWeight: '800' }]}>{item.status}</Text>
-                    <Image source={require('../../../assets/images/PushPin.png')} />
-                  </View>
-                  <Text style={{ fontWeight: "bold", fontSize: 16, color: "#003DA0" }}>{item.lsxId}</Text>
-                  <Text style={{ fontSize: 14, fontWeight: '500', color: "#667085" }}>Deadline: {item.deadline}</Text>
-                  <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <View style={{ backgroundColor: "#FDE8D6", height: 20, flex: 3, borderRadius: 15 }}>
-                      <View style={{ backgroundColor: "#FF9432", width: '40%', height: "100%", borderRadius: 15, paddingStart: 10 }}>
-                        <Text style={{ color: "#fff", fontSize: 14, }}>40%</Text>
-                      </View>
-                    </View>
-                    <View style={{ backgroundColor: "#C5DBF2", height: 20, flex: 3, borderRadius: 15, marginHorizontal: 15 }}>
-                      <View style={{ backgroundColor: "#0375F3", width: '60%', height: "100%", borderRadius: 15, paddingStart: 10 }}>
-                        <Text style={{ color: "#fff", fontSize: 14, }}>60%</Text>
-                      </View>
-                    </View>
-                    <Image
-                      style={{ width: 16, height: 16 }}
-                      source={require('../../../assets/images/Warning.png')} />
-                  </View>
-                </View>
-
-              </View>
-              <View style={{ width: '100%', height: 1, backgroundColor: '#D0D5DD', marginVertical: 5 }}></View>
-            </View>
+            <ItemData item={item} key={item.lsxId} />
           )}
         />
       </View>
@@ -218,15 +226,3 @@ const styles = StyleSheet.create({
   },
 
 });
-const getStatusStyle = (status: string) => {
-  switch (status) {
-    case 'Chưa sản xuất':
-      return { color: '#C25705', backgroundColor: '#FFECDD', padding: 5, borderRadius: 5 };
-    case 'Đang sản xuất':
-      return { color: '#076A94', backgroundColor: '#D8F3FD', padding: 5, borderRadius: 5 };
-    case 'Hoàn thành':
-      return { color: '#1A7526', backgroundColor: '#D7F2DB', padding: 5, borderRadius: 5 };
-    default:
-      return {};
-  }
-};

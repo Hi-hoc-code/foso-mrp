@@ -1,41 +1,59 @@
+import { useState } from "react";
+
+export type StatusProps = "not" | "doing" | "done";
+
+export type DataType = {
+    lsxId: string;
+    status: StatusProps;
+    deadline: string;
+    progress: {
+        planned: number;
+        actual: number;
+    };
+}
+
 export const useData = () => {
-    const listData = [
+    const listData: DataType[] = [
         {
             lsxId: 'LSX-13032514',
-            status: 'Chưa sản xuất',
+            status: "not",
             deadline: '2023-12-01',
-            progress: { planned: 50, actual: 20 },
-            pinned: false,
+            progress: {
+                planned: 50, actual: 20,
+
+            }
         },
         {
             lsxId: 'LSX-13012514',
-            status: 'Đang sản xuất',
+            status: "doing",
             deadline: '2023-12-05',
-            progress: { planned: 80, actual: 60 },
-            pinned: true,
+            progress: { planned: 80, actual: 60 }
         },
         {
             lsxId: 'LSX-13032914',
-            status: 'Hoàn thành',
+            status: "done",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 },
-            pinned: false,
+            progress: { planned: 100, actual: 100 }
         },
         {
             lsxId: 'LSX-17032514',
-            status: 'Hoàn thành',
+            status: "done",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 },
-            pinned: false,
+            progress: { planned: 100, actual: 100 }
         },
         {
             lsxId: 'LSX-13037514',
-            status: 'Hoàn thành',
+            status: "not",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 },
-            pinned: false,
+            progress: { planned: 100, actual: 100 }
+
         },
     ];
-    return {listData}
+
+  
+    return {
+        listData,
+        
+    }
 };
 

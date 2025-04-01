@@ -5,9 +5,10 @@ import Checkbox from 'expo-checkbox';
 
 import Animated, { FadeIn, SlideInDown, SlideInLeft, SlideInRight, SlideInUp, SlideOutLeft } from 'react-native-reanimated';
 import LeftModal from './components/LeftModal';
+import { useData } from './useData';
+import { imageAssests } from '@/assets/images/image';
 const HomeScreen = () => {
-  const [modelVisible, setModelVisible] = React.useState(false);
-
+  const [modelVisible, setModelVisible] = React.useState(true);
   const toggleModal = () => {
     setModelVisible(!modelVisible);
   }
@@ -16,7 +17,7 @@ const HomeScreen = () => {
       <Header />
       <View style={styles.container}>
         <Image
-          source={require('../../assets/images/ABC.png')}
+          source={imageAssests.abc}
           style={styles.imgAdd}
         />
         <Text style={{ fontSize: 18, fontWeight: 400, color: "#11315B", marginBottom: 24 }}>Chưa có Lệnh sản xuất</Text>
@@ -31,22 +32,13 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <LeftModal visible={modelVisible} changeVisible={toggleModal} />
+      <LeftModal visible={modelVisible} changeVisible={toggleModal}  />
     </View >
   )
 }
 
 export default HomeScreen
-type dataType = {
-  lsxId: string;
-  status: string;
-  deadline: string;
-  progress: {
-    planned: number;
-    actual: number;
-  };
-  pinned: boolean;
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
