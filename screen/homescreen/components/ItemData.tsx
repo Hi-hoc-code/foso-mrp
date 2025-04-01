@@ -1,6 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { DataType } from '../useData'
+import { imageAssests } from '@/assets/images/image';
 
 const ItemData = ({ item }: { item: DataType }) => {
 
@@ -20,53 +21,129 @@ const ItemData = ({ item }: { item: DataType }) => {
       default:
         return {};
     }
-  },[item.status]);
+  }, [item.status]);
+  const statusText = React.useMemo(() => {
+    switch (item.status) {
+      case "not":
+        return "Chưa hoàn thành";
+      case "doing":
+        return "Đang thực hiện";
+      case "done":
+        return "Đã hoàn thành";
+      default:
+        return "Không xác định";
+    }
+  }, [item.status]);
+  const pinColor = React.useMemo(() => isPinned ? "red" : "grey", [isPinned])
 
-  const pinColor= React.useMemo(()=> isPinned ? "red" : "grey" , [isPinned])
-
-   return (
+  return (
     <View>
-      <View style={{ flexDirection: "row", padding: 5, paddingEnd: 10, backgroundColor: "#F3F8FE" }}>
-        <View style={{ height: '100%', width: 5, marginEnd: 5, borderBottomLeftRadius: 8, borderTopLeftRadius: 8, backgroundColor: "#0375F4" }}></View>
-        <View>
-          <View style={{ justifyContent: "space-between", flexDirection: 'row' }}>
-            <Text style={[getStatusStyle, { fontWeight: '800' }]}>{item.status}</Text>
+      <View style={styles.container}>
+        <View style={styles.leftLine}></View>
+        <View style={{ gap: 8 }}>
+          <View style={styles.row_between}>
+            <Text style={[getStatusStyle, styles.fontWeight800]}>{statusText}</Text>
             <TouchableOpacity onPress={onPressPinned}>
-
-              <Image source={require('../../../assets/images/PushPin.png')}
-                style={{
-                  width: 20,
-                  height: 20,
-                  marginRight: 10,
-                  tintColor: pinColor
-                }} />
+              <Image source={imageAssests.pushPin}
+                style={[styles.imgPin, { tintColor: pinColor }]} />
             </TouchableOpacity>
           </View>
-          <Text style={{ fontWeight: "bold", fontSize: 16, color: "#003DA0" }}>{item.lsxId}</Text>
-          <Text style={{ fontSize: 14, fontWeight: '500', color: "#667085" }}>Deadline: {item.deadline}</Text>
-          <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <View style={{ backgroundColor: "#FDE8D6", height: 20, flex: 3, borderRadius: 15 }}>
-              <View style={{ backgroundColor: "#FF9432", width: '40%', height: "100%", borderRadius: 15, paddingStart: 10 }}>
-                <Text style={{ color: "#fff", fontSize: 14, }}>40%</Text>
+          <Text style={styles.textID}>{item.lsxId}</Text>
+          <Text style={styles.textDeadline}>Deadline: {item.deadline}</Text>
+          <View style={styles.row_between_alight_100}>
+            <View style={[styles.process, { backgroundColor: "#FDE8D6" }]}>
+              <View style={[styles.boldProcess, { backgroundColor: "#FF9432", width: '40%', }]}>
+                <Text style={[styles.textProcess]}>40%</Text>
               </View>
             </View>
-            <View style={{ backgroundColor: "#C5DBF2", height: 20, flex: 3, borderRadius: 15, marginHorizontal: 15 }}>
-              <View style={{ backgroundColor: "#0375F3", width: '60%', height: "100%", borderRadius: 15, paddingStart: 10 }}>
-                <Text style={{ color: "#fff", fontSize: 14, }}>60%</Text>
+            <View style={[styles.process, { backgroundColor: "#C5DBF2", marginHorizontal: 10 }]}>
+              <View style={[styles.boldProcess, { backgroundColor: "#0375F3", width: '60%' }]}>
+                <Text style={[styles.textProcess]}>60%</Text>
               </View>
             </View>
             <Image
-              style={{ width: 16, height: 16, marginRight: 10 }}
-              source={require('../../../assets/images/Warning.png')} />
+              style={[styles.imgWarning]}
+              source={imageAssests.warning} />
           </View>
         </View>
-
       </View>
-      <View style={{ width: '100%', height: 1, backgroundColor: '#D0D5DD', marginVertical: 5 }}></View>
+      <View style={styles.underline}></View>
     </View>
   )
 }
 
 export default ItemData
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    padding: 5,
+    paddingEnd: 10,
+    backgroundColor: "#F3F8FE"
+  },
+  leftLine: {
+    height: '100%',
+    width: 5,
+    marginEnd: 5,
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
+    backgroundColor: "#0375F4"
+  },
+  row_between: {
+    justifyContent: "space-between",
+    flexDirection: 'row'
+  },
+  row_between_alight_100: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  fontWeight800: {
+    fontWeight: '800'
+  },
+  imgPin:
+  {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+
+  },
+  textID:
+  {
+    fontWeight: "bold",
+    fontSize: 12,
+    color: "#003DA0"
+  },
+  textDeadline: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: "#667085"
+  },
+  process: {
+    height: 12,
+    flex: 3,
+    borderRadius: 15
+  },
+  boldProcess: {
+    height: "100%",
+    borderRadius: 15,
+    paddingStart: 10
+  },
+  textProcess: {
+    color: "#fff",
+    fontSize: 8
+  },
+  imgWarning: {
+    width: 12,
+    height: 12,
+    marginRight: 10
+  },
+  underline: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#D0D5DD',
+    marginVertical: 5
+  }
+
+})

@@ -1,11 +1,7 @@
-import { Button, FlatList, Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, SafeAreaView } from 'react-native'
-import React, { useEffect } from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
 import Header from './components/Header'
-import Checkbox from 'expo-checkbox';
-
-import Animated, { FadeIn, SlideInDown, SlideInLeft, SlideInRight, SlideInUp, SlideOutLeft } from 'react-native-reanimated';
 import LeftModal from './components/LeftModal';
-import { useData } from './useData';
 import { imageAssests } from '@/assets/images/image';
 const HomeScreen = () => {
   const [modelVisible, setModelVisible] = React.useState(true);
@@ -20,19 +16,19 @@ const HomeScreen = () => {
           source={imageAssests.abc}
           style={styles.imgAdd}
         />
-        <Text style={{ fontSize: 18, fontWeight: 400, color: "#11315B", marginBottom: 24 }}>Chưa có Lệnh sản xuất</Text>
+        <Text style={styles.textNotice}>Chưa có Lệnh sản xuất</Text>
         <TouchableOpacity style={[styles.button,]} onPress={() => toggleModal()}>
           <View style={styles.row}>
             <Image
-              source={require('../../assets/images/gimVer.png')}
-              style={{ width: 18, height: 18, marginRight: 10 }}
+              source={imageAssests.gimVer}
+              style={styles.imgPin}
             />
-            <Text style={{ fontSize: 18, color: '#fff' }}>Bắt đầu ghim lệnh ngay</Text>
+            <Text style={styles.textStartPin}>Bắt đầu ghim lệnh ngay</Text>
           </View>
         </TouchableOpacity>
       </View>
 
-      <LeftModal visible={modelVisible} changeVisible={toggleModal}  />
+      <LeftModal visible={modelVisible} changeVisible={toggleModal} />
     </View >
   )
 }
@@ -110,5 +106,19 @@ const styles = StyleSheet.create({
     marginStart: 12,
     borderRadius: 8
   },
-
+  textNotice: {
+    fontSize: 18,
+    fontWeight: 400,
+    color: "#11315B",
+    marginBottom: 24
+  },
+  imgPin: {
+    width: 18,
+    height: 18,
+    marginRight: 10
+  },
+  textStartPin: {
+    fontSize: 18,
+    color: '#fff'
+  }
 });

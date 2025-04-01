@@ -5,6 +5,7 @@ import Checkbox from 'expo-checkbox';
 import { StatusProps, useData } from '../useData';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import ItemData from './ItemData';
+import { imageAssests } from '@/assets/images/image';
 
 type LeftModalProps = {
   visible: boolean,
@@ -19,11 +20,12 @@ const LeftModal = (props: LeftModalProps) => {
   const [search, setSearch] = React.useState('');
   const { listData } = useData()
   const [showStatus, setShowStatus] = React.useState(true);
-  const rotation = useSharedValue(0)
+  const rotation = useSharedValue(180)
   const [data, setData] = React.useState(listData)
   const onShowStatus = () => {
     setShowStatus(!showStatus);
-    rotation.value = withTiming(rotation.value + 180, { duration: 300 })
+    rotation.value = withTiming(rotation.value === 0 ? 180 : 0, { duration: 400 });
+    console.log(rotation.value)
   }
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -63,11 +65,11 @@ const LeftModal = (props: LeftModalProps) => {
             placeholder='Tìm kiếm mã lệnh sản xuất'
             value={search}
             onChangeText={setSearch}
-            style={{ flex: 1 }}
+            style={{ flex: 1, fontSize: 12 }}
           />
-          <View style={{ backgroundColor: '#92BFF7', width: 50, height: '100%', borderBottomRightRadius: 8, borderTopRightRadius: 8, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={styles.searchContainer}>
             <Image
-              source={require('../../../assets/images/searchIcon.png')}
+              source={imageAssests.searchIcon}
               style={styles.imgSearch}
             />
           </View>
@@ -78,63 +80,63 @@ const LeftModal = (props: LeftModalProps) => {
           {
             paddingEnd: 15,
             marginTop: 8,
-            borderBottomRightRadius: showStatus? 0 : 8,
-            borderBottomLeftRadius: showStatus? 0 : 8
+            borderBottomRightRadius: showStatus ? 0 : 8,
+            borderBottomLeftRadius: showStatus ? 0 : 8
           }]
         }>
-          <View style={[styles.row, { justifyContent: 'space-between', height: 45 }]}>
-            <Image
-              source={require('../../../assets/images/ChartDonut.png')}
-              style={{ width: 16, height: 16 }} />
+          <TouchableOpacity onPress={onShowStatus}>
+            <View style={[styles.row, styles.statusContainer]}>
+              <Image
+                source={imageAssests.chartDonut}
+                style={styles.imgStyle16} />
 
-            <Text style={{ textAlign: 'left', flex: 1, marginLeft: 5, fontSize: 16 }}>Trạng thái</Text>
-            <Animated.View style={[animatedStyle, { justifyContent: 'center', alignItems: 'center' }]}>
-              <TouchableOpacity onPress={onShowStatus}>
+              <Text style={styles.textStatus}>Trạng thái</Text>
+              <Animated.View style={[animatedStyle, styles.juti_alight_center]}>
                 <Image
-                  source={require('../../../assets/images/CaretUp.png')}
-                  style={{ width: 16, height: 16 }} />
-              </TouchableOpacity>
-            </Animated.View>
-          </View>
+                  source={imageAssests.caretUp}
+                  style={styles.imgStyle16} />
+              </Animated.View>
+            </View>
+          </TouchableOpacity>
         </View>
         {showStatus && <View
-          style={[styles.border, { borderTopRightRadius: 0, borderTopLeftRadius: 0 }]}>
+          style={[styles.border, styles.borderTop]}>
 
-          <View style={[styles.row, { justifyContent: 'flex-start', height: 45 }]}>
+          <View style={[styles.row, styles.checkBoxStyle]}>
             <Checkbox
-              style={styles.checkbox}
+              style={styles.checkboxImg}
               value={isNotChecked}
               onValueChange={setIsNotChecked}
               color={isNotChecked ? '#1760B9' : undefined}
             />
             <Text style={[styles.textSelect]}>Chưa sản xuất</Text>
           </View>
-          <View style={[styles.row, { justifyContent: 'flex-start', height: 45 }]}>
+          <View style={[styles.row, styles.checkBoxStyle]}>
             <Checkbox
-              style={styles.checkbox}
+              style={styles.checkboxImg}
               value={isDoingChecked}
               onValueChange={setIsDoingChecked}
               color={isDoingChecked ? '#1760B9' : undefined}
             />
-            <Text style={[styles.textSelect, { backgroundColor: '#D8F3FD', color: '#076A94' }]}>Đang sản xuất</Text>
+            <Text style={[styles.textSelect, styles.textDoing]}>Đang sản xuất</Text>
           </View>
-          <View style={[styles.row, { justifyContent: 'flex-start', height: 45 }]}>
+          <View style={[styles.row, styles.checkBoxStyle]}>
             <Checkbox
-              style={styles.checkbox}
+              style={styles.checkboxImg}
               value={isDoneChecked}
               onValueChange={setIsDoneChecked}
               color={isDoneChecked ? '#1760B9' : undefined}
             />
-            <Text style={[styles.textSelect, { backgroundColor: '#D7F2DB', color: '#1A7526' }]}>Đã hoàn thành</Text>
+            <Text style={[styles.textSelect, styles.textDone]}>Đã hoàn thành</Text>
           </View>
         </View>}
 
-        <View style={[styles.row, styles.border, { height: 45, justifyContent: 'space-between', paddingEnd: 15, marginVertical: 10 }]}>
-          <Text style={{ fontSize: 16, color: '#11315B', fontWeight: '600' }}>Bỏ ghim toàn bộ</Text>
+        <View style={[styles.row, styles.border, styles.flexBoxRemovePin]}>
+          <Text style={styles.removePinText}>Bỏ ghim toàn bộ</Text>
           <TouchableOpacity>
             <Image
-              style={{ width: 16, height: 16 }}
-              source={require('../../../assets/images/Vector.png')} />
+              style={styles.imgStyle16}
+              source={imageAssests.vector} />
           </TouchableOpacity>
         </View>
         <FlatList
@@ -201,11 +203,12 @@ const styles = StyleSheet.create({
     height: 18,
     tintColor: "#11315B"
   },
-  checkbox: {
-
+  checkboxImg: {
+    width: 16,
+    height: 16
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: '600',
     color: "#25387A"
   },
@@ -224,5 +227,64 @@ const styles = StyleSheet.create({
     marginStart: 12,
     borderRadius: 8
   },
+  searchContainer: {
+    backgroundColor: '#92BFF7',
+    width: 50,
+    height: '100%',
+    borderBottomRightRadius: 8,
+    borderTopRightRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  statusContainer: {
+    justifyContent: 'space-between',
+    height: 45
+  },
+  textStatus: {
+    textAlign: 'left',
+    flex: 1,
+    marginLeft: 5,
+    fontSize: 14
+  },
+  juti_alight_center: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  borderTop: {
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0
+  },
+  imgStyle16: {
+    width: 16,
+    height: 16
+  },
+  checkBoxStyle: {
+    justifyContent: 'flex-start',
+    height: 45
+  },
+  textDoing: {
+    backgroundColor: '#D8F3FD',
+    color: '#076A94'
+  },
+  textNot: {
+
+  },
+  textDone: {
+    backgroundColor: '#D7F2DB',
+    color: '#1A7526'
+  },
+  flexBoxRemovePin: {
+    height: 45,
+    justifyContent: 'space-between',
+    paddingEnd: 15,
+    marginVertical: 10
+  },
+  removePinText: {
+    fontSize: 14,
+    color: '#11315B',
+    fontWeight: '600'
+  }
+
+
 
 });

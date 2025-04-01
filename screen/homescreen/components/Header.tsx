@@ -1,25 +1,34 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
+import LeftModal from './LeftModal';
+import { imageAssests } from '@/assets/images/image';
 const Header = () => {
+   const [modelVisible, setModelVisible] = React.useState(false);
+    const toggleModal = () => {
+      setModelVisible(!modelVisible);
+    }
   return (
     <LinearGradient
       colors={['#62BDFF', '#0B69D2']}
       style={styles.containerHeader}
     >
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => toggleModal()}
+      >
         <Image
-          source={require('../../../assets/images/menu_line.png')}
+          source={imageAssests.menuLine}
           style={styles.imgNav}
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>Lệnh Sản Xuất</Text>
       <TouchableOpacity>
         <Image
-        source={require('../../../assets/images/navRight.png')}
-        style={styles.imgNav}
-      />
+          source={imageAssests.navRight}
+          style={styles.imgNav}
+        />
       </TouchableOpacity>
+      <LeftModal visible={modelVisible} changeVisible={toggleModal} />
     </LinearGradient>
   )
 }
