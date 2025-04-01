@@ -4,13 +4,13 @@ import Header from './components/Header'
 import LeftModal from './components/LeftModal';
 import { imageAssests } from '@/assets/images/image';
 const HomeScreen = () => {
-  const [modelVisible, setModelVisible] = React.useState(true);
+  const [modelVisible, setModelVisible] = React.useState(false);
   const toggleModal = () => {
     setModelVisible(!modelVisible);
   }
   return (
     <View style={{ flex: 1 }}>
-      <Header />
+      <Header imgLeft={imageAssests.menuLine} title={"Lệnh Sản Xuất"} imgRight={imageAssests.navRight}/>
       <View style={styles.container}>
         <Image
           source={imageAssests.abc}

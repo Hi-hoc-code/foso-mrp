@@ -9,7 +9,6 @@ const ItemData = ({ item }: { item: DataType }) => {
   const onPressPinned = () => {
     setIsPinned(!isPinned)
   }
-
   const getStatusStyle = React.useMemo(() => {
     switch (item.status) {
       case "not":

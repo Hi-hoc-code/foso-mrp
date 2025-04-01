@@ -2,7 +2,7 @@ import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, S
 import React from 'react'
 import Modal from 'react-native-modal';
 import Checkbox from 'expo-checkbox';
-import { StatusProps, useData } from '../useData';
+import { useData } from '../useData';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import ItemData from './ItemData';
 import { imageAssests } from '@/assets/images/image';

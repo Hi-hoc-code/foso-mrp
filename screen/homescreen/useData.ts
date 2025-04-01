@@ -1,7 +1,4 @@
-import { useState } from "react";
-
 export type StatusProps = "not" | "doing" | "done";
-
 export type DataType = {
     lsxId: string;
     status: StatusProps;
@@ -11,7 +8,11 @@ export type DataType = {
         actual: number;
     };
 }
-
+export type headerType={
+    imgLeft: string,
+    title: string,
+    imgRight: string,
+}
 export const useData = () => {
     const listData: DataType[] = [
         {
@@ -50,10 +51,10 @@ export const useData = () => {
         },
     ];
 
-  
+
     return {
         listData,
-        
+
     }
 };
 
