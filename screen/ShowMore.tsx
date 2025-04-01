@@ -1,12 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import Header from './homescreen/components/Header';
-import { imageAssests } from '@/assets/images/image';
 const ShowMore = () => {
-  const [modelVisible, setModelVisible] = React.useState(false);
-  const toggleModal = () => {
-    setModelVisible(!modelVisible);
-  }
   return (
     <View style={{ flex: 1 }}>
        <Header imgLeft={null} title={"Xem thêm"} imgRight={null}/>

@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import Header from './homescreen/components/Header';
-import { imageAssests } from '@/assets/images/image';
 const Order = () => {
   return (
     <View style={{ flex: 1 }}>

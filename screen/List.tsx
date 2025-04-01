@@ -1,6 +1,5 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { imageAssests } from '@/assets/images/image';
 import Header from './homescreen/components/Header';
 const List = () => {
   return (

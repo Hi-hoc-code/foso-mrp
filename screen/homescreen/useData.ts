@@ -8,11 +8,7 @@ export type DataType = {
         actual: number;
     };
 }
-export type headerType={
-    imgLeft: string,
-    title: string,
-    imgRight: string,
-}
+
 export const useData = () => {
     const listData: DataType[] = [
         {
