@@ -85,5 +85,7 @@ const filteredData = useMemo(() => {
 
 ## Screenshots
 
-![Lệnh SX](assets/images/screenshot/ListtAndroid1.png)
-![Modal Show](assets/images/screenshot/ModalShow.png)
+<p align="center">
+  <img src="assets/images/screenshot/ListtAndroid1.png" width="45%" />
+  <img src="assets/images/screenshot/ModalShow.png" width="45%" />
+</p>
