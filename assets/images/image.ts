@@ -1,5 +1,5 @@
 export const imageAssests = {
-    abc: require('../images/ABC.png'),
+    home: require('../images/home.png'),
     menuLine: require('../images/menu_line.png'),
     navRight: require('..//images/navRight.png'),
     pushPin: require('../images/PushPin.png'),

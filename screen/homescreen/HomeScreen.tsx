@@ -13,7 +13,7 @@ const HomeScreen = () => {
       <Header imgLeft={imageAssests.menuLine} title={"Lệnh Sản Xuất"} imgRight={imageAssests.navRight}/>
       <View style={styles.container}>
         <Image
-          source={imageAssests.abc}
+          source={imageAssests.home}
           style={styles.imgAdd}
         />
         <Text style={styles.textNotice}>Chưa có Lệnh sản xuất</Text>
