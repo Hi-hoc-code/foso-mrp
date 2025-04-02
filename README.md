@@ -3,39 +3,33 @@
 
 ## Get Started
 
-To get started with the Expo app, follow these steps:
+Bắt đầu dự án React Native với Expo
 
-1. **Install Dependencies**
+1. **Cài dặt npm**
    ```bash
    npm install
    ```
-2. **Start the App**
+2. **Chạy dự án**
    ```bash
    npx expo start
    ```
-   In the output, you'll find options to open the app in a:
 
-   - [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)
-   - [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-   - [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
-   - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Installing Additional Libraries
+## Cài đặt các thư viện bổ xung
 
 ```bash
 npm install @react-navigation/bottom-tabs expo-checkbox expo-linear-gradient react-native-animatable react-native-modal
 ```
 
-## Project Structure
+## Cấu trúc dự án
 
 ```
 FOSO-MRP/
 │-- app/
-│   │-- _layout.tsx    # Handles Bottom Tab Navigation
+│   │-- _layout.tsx    
 │
-│-- assets/            # Contains fonts, images
+│-- assets/
+|   |--fonts/
+|   |--images/                 
 │-- screen/
 │   │-- homescreen/
 │   │   │-- components/
@@ -48,15 +42,13 @@ FOSO-MRP/
 │   │-- Order.tsx
 │   │-- ShowMore.tsx
 │   │-- Total.tsx
-│-- dataMock.ts        # Mock data
-│-- useData.ts         # Hook for handling data
-│-- package.json       # Dependency list
-│-- tsconfig.json      # TypeScript configuration
+│-- dataMock.ts       
+│-- useData.ts        
+│-- package.json      
+│-- tsconfig.json    
 ```
 
-## Installed Dependencies
-
-The following dependencies are included in the project:
+## Một số Dependencies trong dự án
 
 ```json
 "dependencies": {
@@ -68,23 +60,22 @@ The following dependencies are included in the project:
 }
 ```
 
-## Key Libraries
+## Các thư viện quan trọng
 
-- **@react-navigation/bottom-tabs**: Handles Bottom Tab Navigation.
-- **expo-checkbox**: Checkbox component for React Native.
-- **expo-linear-gradient**: Enables gradient effects.
-- **react-native-animatable**: Provides smooth animations.
-- **react-native-modal**: Creates modals easily.
+- **@react-navigation/bottom-tabs**: Xử lý điều hướng BottomTab.
+- **expo-checkbox**: Thành phần Checkbox cho React Native.
+- **expo-linear-gradient**: Cho phép hiệu ứng gradient.
+- **react-native-animatable**: Tạo animation cho mượt app.
+- **react-native-modal**: Tạo modal.
 
-## Performance Optimization with Hooks
+## Tối ưu hóa hiệu xuất
+Sử dụng Hooks
+- **useState**: Quản lý trạng thái của component
+- **useEffect**: Xử lí cập nhập lại dữ liệu
+- **useMemo**: Tối ưu hóa tính hóa, rerender UI khi có mảng data size lớn
+Sử dụng Animation : Tích hợp vào buttons, views, tăng trải nghiệm người dùng
 
-This project optimizes rendering using React hooks:
-
-- **useState**: Manages component state.
-- **useEffect**: Handles side effects like API calls.
-- **useMemo**: Prevents unnecessary recalculations.
-
-### Example Optimization Using `useMemo`
+### Ví dụ về sử dụng Hook `useMemo`
 
 ```typescript
 const filteredData = useMemo(() => {
@@ -92,13 +83,7 @@ const filteredData = useMemo(() => {
 }, [data]);
 ```
 
-## Research
-
-- [Expo Documentation](https://docs.expo.dev/more/create-expo/)
-- [Bottom Tab Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)
-- [React Native Modal](https://www.npmjs.com/package/react-native-modal)
-
 ## Screenshots
 
-![Lệnh SX](assets/images/screenshot/LenhSX.png)
+![Lệnh SX](assets/images/screenshot/ListtAndroid1.png)
 ![Modal Show](assets/images/screenshot/ModalShow.png)
