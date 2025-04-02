@@ -1,38 +1,18 @@
-# Welcome to the Expo App 👋
+# FOSO MRP 👋
 
-This is an Expo project created with [create-expo-app](https://www.npmjs.com/package/create-expo-app). This README will guide you through the setup, structure, and key features of the application.
-
-## Table of Contents
-
-- [Get Started](#get-started)
-- [Installing Additional Libraries](#installing-additional-libraries)
-- [Project Structure](#project-structure)
-- [Installed Dependencies](#installed-dependencies)
-- [Key Libraries](#key-libraries)
-- [Performance Optimization with Hooks](#performance-optimization-with-hooks)
-- [Research](#research)
-- [Screenshots](#screenshots)
 
 ## Get Started
 
 To get started with the Expo app, follow these steps:
 
 1. **Install Dependencies**
-
-   Open your terminal and run the following command:
-
    ```bash
    npm install
    ```
-
 2. **Start the App**
-
-   After installing the dependencies, start the app with:
-
    ```bash
    npx expo start
    ```
-
    In the output, you'll find options to open the app in a:
 
    - [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)

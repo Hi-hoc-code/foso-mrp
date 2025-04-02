@@ -7,6 +7,7 @@ export type DataType = {
         planned: number;
         actual: number;
     };
+    isPinned: boolean
 }
 
 export const useData = () => {
@@ -18,31 +19,36 @@ export const useData = () => {
             progress: {
                 planned: 50, actual: 20,
 
-            }
+            },
+            isPinned: true
         },
         {
             lsxId: 'LSX-13012514',
             status: "doing",
             deadline: '2023-12-05',
-            progress: { planned: 80, actual: 60 }
+            progress: { planned: 80, actual: 60 },
+            isPinned: false
         },
         {
             lsxId: 'LSX-13032914',
             status: "done",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 }
+            progress: { planned: 100, actual: 100 },
+            isPinned: true
         },
         {
             lsxId: 'LSX-17032514',
             status: "done",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 }
+            progress: { planned: 100, actual: 100 },
+            isPinned: true
         },
         {
             lsxId: 'LSX-13037514',
             status: "not",
             deadline: '2023-11-30',
-            progress: { planned: 100, actual: 100 }
+            progress: { planned: 100, actual: 100 },
+            isPinned: false
 
         },
     ];

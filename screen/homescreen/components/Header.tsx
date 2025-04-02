@@ -1,8 +1,7 @@
-import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import LeftModal from './LeftModal';
-import { fontType } from '@/assets/fonts/fontType';
 
 type HeaderProps = {
   imgLeft: any | null;

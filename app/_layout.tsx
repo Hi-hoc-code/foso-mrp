@@ -63,7 +63,7 @@ const _layout = () => {
                   tintColor: focused ? '#0375F3' : '#9295A4',
                 }]}
               />
-            ), 
+            ),
           }}
         />
         <Tab.Screen
@@ -73,9 +73,10 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.list}
-                style={[styles.tabBarStyle, {
-                  tintColor: focused ? '#0375F3' : '#9295A4',
-                }]}
+                style={[
+                  styles.tabBarStyle,
+                  { tintColor: focused ? '' : '#9295A4' } 
+                ]}
               />
             ),
           }}
@@ -86,7 +87,7 @@ const _layout = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Image
-                source={imageAssests.list}
+                source={imageAssests.showMore}
                 style={[styles.tabBarStyle, {
                   tintColor: focused ? '#0375F3' : '#9295A4',
                 }]}
@@ -105,8 +106,8 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     width: 24,
     height: 24,
-    fontSize:12,
+    fontSize: 12,
     fontWeight: 400,
-    fontFamily:'LexendDeca_Regular'
+    fontFamily: 'LexendDeca_Regular'
   }
 })

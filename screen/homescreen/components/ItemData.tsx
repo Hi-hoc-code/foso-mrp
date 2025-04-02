@@ -66,9 +66,11 @@ const ItemData = ({ item }: { item: DataType }) => {
                 <Text style={[styles.textProcess]}>60%</Text>
               </View>
             </View>
-            <Image
-              style={[styles.imgWarning]}
-              source={imageAssests.warning} />
+            <TouchableOpacity>
+              <Image
+                style={[styles.imgWarning]}
+                source={imageAssests.warning} />
+            </TouchableOpacity>
           </View>
         </View>
       </LinearGradient>
@@ -136,11 +138,11 @@ const styles = StyleSheet.create({
   process: {
     height: 12,
     flex: 3,
-    borderRadius: 15
+    borderRadius: 100
   },
   boldProcess: {
     height: "100%",
-    borderRadius: 15,
+    borderRadius: 100,
     paddingStart: 10,
     justifyContent: 'center'
   },
