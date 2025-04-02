@@ -24,9 +24,9 @@ const ItemData = ({ item }: { item: DataType }) => {
   const statusText = React.useMemo(() => {
     switch (item.status) {
       case "not":
-        return "Chưa hoàn thành";
+        return "Chưa sản xuất";
       case "doing":
-        return "Đang thực hiện";
+        return "Đang sản xuất";
       case "done":
         return "Đã hoàn thành";
       default:
