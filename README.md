@@ -103,5 +103,5 @@ Modal (modal:https://www.npmjs.com/package/react-native-modal)
 
 ## Screenshots 
 
-![Alt text](assets\images\screenshot\LenhSX.png)
-![Alt text](assets\images\screenshot\ModalShow.png)
+![Lệnh SX](../../../assets/images/screenshot/LenhSX.png)
+![Modal show](../../../assets/images/screenshot/ModalShow.png)
