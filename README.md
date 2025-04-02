@@ -1,16 +1,33 @@
-# Welcome to your Expo app 👋
+# Welcome to the Expo App 👋
 
-This is an [Expo](https://expo.dev) project created with [create-expo-app](https://www.npmjs.com/package/create-expo-app).
+This is an Expo project created with [create-expo-app](https://www.npmjs.com/package/create-expo-app). This README will guide you through the setup, structure, and key features of the application.
 
-## Get started
+## Table of Contents
 
-1. Install dependencies
+- [Get Started](#get-started)
+- [Installing Additional Libraries](#installing-additional-libraries)
+- [Project Structure](#project-structure)
+- [Installed Dependencies](#installed-dependencies)
+- [Key Libraries](#key-libraries)
+- [Performance Optimization with Hooks](#performance-optimization-with-hooks)
+- [Research](#research)
+- [Screenshots](#screenshots)
+
+## Get Started
+
+To get started with the Expo app, follow these steps:
+
+1. **Install Dependencies**
+
+   Open your terminal and run the following command:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Start the App**
+
+   After installing the dependencies, start the app with:
 
    ```bash
    npx expo start
@@ -18,22 +35,20 @@ This is an [Expo](https://expo.dev) project created with [create-expo-app](https
 
    In the output, you'll find options to open the app in a:
 
-   - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-   - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-   - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+   - [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)
+   - [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+   - [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
    - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Installing additional libraries
-
-If needed, install the following libraries:
+## Installing Additional Libraries
 
 ```bash
 npm install @react-navigation/bottom-tabs expo-checkbox expo-linear-gradient react-native-animatable react-native-modal
 ```
 
-## Project structure
+## Project Structure
 
 ```
 FOSO-MRP/
@@ -59,7 +74,9 @@ FOSO-MRP/
 │-- tsconfig.json      # TypeScript configuration
 ```
 
-## Installed dependencies
+## Installed Dependencies
+
+The following dependencies are included in the project:
 
 ```json
 "dependencies": {
@@ -71,7 +88,7 @@ FOSO-MRP/
 }
 ```
 
-### Key Libraries
+## Key Libraries
 
 - **@react-navigation/bottom-tabs**: Handles Bottom Tab Navigation.
 - **expo-checkbox**: Checkbox component for React Native.
@@ -79,15 +96,15 @@ FOSO-MRP/
 - **react-native-animatable**: Provides smooth animations.
 - **react-native-modal**: Creates modals easily.
 
-## Performance optimization with hooks
+## Performance Optimization with Hooks
 
-This project optimizes rendering using:
+This project optimizes rendering using React hooks:
 
 - **useState**: Manages component state.
 - **useEffect**: Handles side effects like API calls.
 - **useMemo**: Prevents unnecessary recalculations.
 
-Example optimization using `useMemo`:
+### Example Optimization Using `useMemo`
 
 ```typescript
 const filteredData = useMemo(() => {
@@ -97,11 +114,11 @@ const filteredData = useMemo(() => {
 
 ## Research
 
-Expo (https://docs.expo.dev/more/create-expo/)
-BottomTab (https://reactnavigation.org/docs/bottom-tab-navigator/)
-Modal (modal:https://www.npmjs.com/package/react-native-modal)
+- [Expo Documentation](https://docs.expo.dev/more/create-expo/)
+- [Bottom Tab Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)
+- [React Native Modal](https://www.npmjs.com/package/react-native-modal)
 
-## Screenshots 
+## Screenshots
 
-![Lệnh SX](../../../assets/images/screenshot/LenhSX.png)
-![Modal show](../../../assets/images/screenshot/ModalShow.png)
+![Lệnh SX](assets/images/screenshot/LenhSX.png)
+![Modal Show](assets/images/screenshot/ModalShow.png)
