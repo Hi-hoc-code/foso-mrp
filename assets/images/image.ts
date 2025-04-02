@@ -3,7 +3,7 @@ export const imageAssests = {
     menuLine: require('../images/menu_line.png'),
     navRight: require('..//images/navRight.png'),
     pushPin: require('../images/push-pin.png'),
-    warning: require('../images/Warning.png'),
+    warning: require('../images/Info.png'),
     searchIcon: require('../images/Icon - Search.png'),
     chartDonut: require('../images/ChartDonut.png'),
     caretUp: require('../images/CaretUp.png'),

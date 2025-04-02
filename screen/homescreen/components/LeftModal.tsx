@@ -1,8 +1,8 @@
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, Switch, LayoutAnimation } from 'react-native'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Modal from 'react-native-modal';
 import Checkbox from 'expo-checkbox';
-import { useData } from '../useData';
+import { DataType, useData } from '../useData';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import ItemData from './ItemData';
 import { imageAssests } from '@/assets/images/image';
@@ -23,6 +23,7 @@ const LeftModal = (props: LeftModalProps) => {
   const [showStatus, setShowStatus] = React.useState(true);
   const rotation = useSharedValue(180)
   const [data, setData] = React.useState(listData)
+  const [sortedData, setSortedData] = React.useState<DataType[]>([]);
   const onShowStatus = () => {
     setShowStatus(!showStatus);
     rotation.value = withTiming(rotation.value === 0 ? 180 : 0, { duration: 400 });
@@ -45,7 +46,25 @@ const LeftModal = (props: LeftModalProps) => {
     }));
   }, [isDoingChecked, isNotChecked, isDoneChecked]);
 
-
+  const togglePinned = (itemId: string) => {
+    setData((prevData) => {
+      const itemIndex = prevData.findIndex(item => item.lsxId === itemId);
+      if (itemIndex === -1) return prevData;
+      const updatedItem = { ...prevData[itemIndex], isPinned: !prevData[itemIndex].isPinned };
+      let newData = prevData.filter((_, index) => index !== itemIndex);
+      if (updatedItem.isPinned) {
+        newData = [updatedItem, ...newData];
+      } else {
+        const pinnedItems = newData.filter(i => i.isPinned);
+        const unpinnedItems = newData.filter(i => !i.isPinned);
+        newData = [...pinnedItems, updatedItem, ...unpinnedItems];
+      }
+      return newData;
+    });
+  };
+  useEffect(() => {
+    setSortedData([...data].sort((a, b) => Number(b.isPinned) - Number(a.isPinned)));
+  }, [data]);
   return (
     <Modal
       isVisible={visible}
@@ -140,11 +159,11 @@ const LeftModal = (props: LeftModalProps) => {
         </TouchableOpacity>
         <FlatList
           extraData={isNotChecked}
-          data={data}
+          data={sortedData}
           keyExtractor={(item) => item.lsxId}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <ItemData item={item} key={item.lsxId} />
+            <ItemData item={item} onTogglePinned={() => togglePinned(item.lsxId)} />
           )}
         />
       </View>

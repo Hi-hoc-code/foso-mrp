@@ -4,12 +4,10 @@ import { DataType } from '../useData'
 import { imageAssests } from '@/assets/images/image';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const ItemData = ({ item }: { item: DataType }) => {
+const ItemData = ({ item, onTogglePinned }: { item: DataType, onTogglePinned: (id: string) => void }) => {
 
   const [isPinned, setIsPinned] = React.useState(false);
-  const onPressPinned = () => {
-    setIsPinned(!isPinned)
-  }
+
   const getStatusStyle = React.useMemo(() => {
     switch (item.status) {
       case "not":
@@ -34,7 +32,12 @@ const ItemData = ({ item }: { item: DataType }) => {
         return "Không xác định";
     }
   }, [item.status]);
-  const pinColor = React.useMemo(() => isPinned ? "red" : "grey", [isPinned])
+  const pinColor = React.useMemo(() => item.isPinned ? "red" : "grey", [item.isPinned]);
+
+  const onPressPinned = () => {
+    setIsPinned(!isPinned)
+    onTogglePinned(item.lsxId);
+  };
 
   return (
     <View>
@@ -48,7 +51,7 @@ const ItemData = ({ item }: { item: DataType }) => {
         <View style={styles.flexItem}>
           <View style={styles.row_between}>
             <Text style={[getStatusStyle, styles.fontWeight400]}>{statusText}</Text>
-            <TouchableOpacity onPress={onPressPinned}>
+            <TouchableOpacity onPress={() => onPressPinned()}>
               <Image source={imageAssests.pushPin}
                 style={[styles.imgPin, { tintColor: pinColor }]} />
             </TouchableOpacity>
