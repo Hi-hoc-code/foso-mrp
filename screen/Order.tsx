@@ -1,12 +1,12 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Header from './homescreen/components/Header';
+import { fontType } from '@/assets/fonts/fontType';
 const Order = () => {
   return (
     <View style={{ flex: 1 }}>
       <Header imgLeft={null} title={"Đơn hàng"} imgRight={null} />
       <View style={styles.container}>
-
       </View>
     </View>
   )

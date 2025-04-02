@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hihoccode.Test"
     },
     "web": {
       "bundler": "metro",
@@ -32,7 +33,24 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/LexendDeca_Thin.ttf",
+            "./assets/fonts/LexendDeca_ExtraLight.ttf",
+            "./assets/fonts/LexendDeca_Light.ttf",
+            "./assets/fonts/LexendDeca_Regular.ttf",
+            "./assets/fonts/LexendDeca_Medium.ttf",
+            "./assets/fonts/LexendDeca_SemiBold.ttf",
+            "./assets/fonts/LexendDeca_Bold.ttf",
+            "./assets/fonts/LexendDeca_ExtraBold.ttf",
+            "./assets/fonts/LexendDeca_Black.ttf"
+          ]
+        }
+      ],
+      "expo-build-properties"
     ],
     "experiments": {
       "typedRoutes": true

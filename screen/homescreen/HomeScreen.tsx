@@ -75,16 +75,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingTop: 40
   },
-  modalText: {
-
-  },
   imgSearch: {
     width: 18,
     height: 18,
     tintColor: "#11315B"
-  },
-  checkbox: {
-
   },
   title: {
     fontSize: 24,
@@ -109,8 +103,10 @@ const styles = StyleSheet.create({
   textNotice: {
     fontSize: 18,
     fontWeight: 400,
-    color: "#11315B",
-    marginBottom: 24
+    fontFamily:'LexendDeca_Regular',
+    textAlign:'center',
+    color:'#11315B',
+    marginBottom: 24,
   },
   imgPin: {
     width: 18,
@@ -119,6 +115,8 @@ const styles = StyleSheet.create({
   },
   textStartPin: {
     fontSize: 18,
-    color: '#fff'
+    fontWeight:400,
+    fontFamily:'LexendDeca_Regular',
+    color:'#fff',
   }
 });

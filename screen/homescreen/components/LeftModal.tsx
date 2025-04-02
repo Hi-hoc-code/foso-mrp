@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, Switch } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, SafeAreaView, Switch, LayoutAnimation } from 'react-native'
 import React from 'react'
 import Modal from 'react-native-modal';
 import Checkbox from 'expo-checkbox';
@@ -25,7 +25,6 @@ const LeftModal = (props: LeftModalProps) => {
   const onShowStatus = () => {
     setShowStatus(!showStatus);
     rotation.value = withTiming(rotation.value === 0 ? 180 : 0, { duration: 400 });
-    console.log(rotation.value)
   }
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -65,7 +64,7 @@ const LeftModal = (props: LeftModalProps) => {
             placeholder='Tìm kiếm mã lệnh sản xuất'
             value={search}
             onChangeText={setSearch}
-            style={{ flex: 1, fontSize: 12 }}
+            style={styles.inputSearch}
           />
           <View style={styles.searchContainer}>
             <Image
@@ -130,15 +129,14 @@ const LeftModal = (props: LeftModalProps) => {
             <Text style={[styles.textSelect, styles.textDone]}>Đã hoàn thành</Text>
           </View>
         </View>}
-
-        <View style={[styles.row, styles.border, styles.flexBoxRemovePin]}>
-          <Text style={styles.removePinText}>Bỏ ghim toàn bộ</Text>
-          <TouchableOpacity>
+        <TouchableOpacity>
+          <View style={[styles.row, styles.border, styles.flexBoxRemovePin]}>
+            <Text style={styles.removePinText}>Bỏ ghim toàn bộ</Text>
             <Image
               style={styles.imgStyle16}
               source={imageAssests.vector} />
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
         <FlatList
           extraData={isNotChecked}
           data={data}
@@ -184,9 +182,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalBackground: {
-
-  },
   modalContainer: {
     flex: 1,
     height: '100%',
@@ -209,8 +204,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '600',
-    color: "#25387A"
+    fontWeight: '500',
+    color: "#25387A",
+    fontFamily: 'LexendDeca_Medium',
   },
   border: {
     borderRadius: 8,
@@ -218,14 +214,15 @@ const styles = StyleSheet.create({
     borderColor: '#D0D5DD',
   },
   textSelect: {
-    padding: 5,
-    paddingHorizontal: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     color: "#C25705",
     fontSize: 14,
-    fontWeight: '600',
-    backgroundColor: '#FFECDD',
+    fontWeight: '400',
+    backgroundColor: 'rgba(255, 129, 26, 0.15)',
     marginStart: 12,
-    borderRadius: 8
+    borderRadius: 8,
+    fontFamily: 'LexendDeca_Regular'
   },
   searchContainer: {
     backgroundColor: '#92BFF7',
@@ -244,7 +241,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flex: 1,
     marginLeft: 5,
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'LexendDeca_Regular '
   },
   juti_alight_center: {
     justifyContent: 'center',
@@ -263,28 +261,32 @@ const styles = StyleSheet.create({
     height: 45
   },
   textDoing: {
-    backgroundColor: '#D8F3FD',
+    backgroundColor: 'rgba(62, 195, 247, 0.2)',
     color: '#076A94'
   },
-  textNot: {
-
-  },
   textDone: {
-    backgroundColor: '#D7F2DB',
+    backgroundColor: 'rgba(53, 189, 75, 0.2)',
     color: '#1A7526'
   },
   flexBoxRemovePin: {
     height: 45,
     justifyContent: 'space-between',
-    paddingEnd: 15,
+    padding: 12,
     marginVertical: 10
   },
   removePinText: {
     fontSize: 14,
     color: '#11315B',
-    fontWeight: '600'
+    fontWeight: '500',
+    fontFamily: 'LexendDeca_Medium '
+  },
+  inputSearch: {
+    fontSize: 12,
+    letterSpacing: 0.4,
+    fontWeight: 300,
+    fontFamily: 'LexendDeca_Light',
+    color: "#9295A4",
+    flex: 1
   }
-
-
 
 });

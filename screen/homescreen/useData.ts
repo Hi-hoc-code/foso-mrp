@@ -47,7 +47,6 @@ export const useData = () => {
         },
     ];
 
-
     return {
         listData,
     }

@@ -2,6 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { DataType } from '../useData'
 import { imageAssests } from '@/assets/images/image';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ItemData = ({ item }: { item: DataType }) => {
 
@@ -12,11 +13,11 @@ const ItemData = ({ item }: { item: DataType }) => {
   const getStatusStyle = React.useMemo(() => {
     switch (item.status) {
       case "not":
-        return { color: '#C25705', backgroundColor: '#FFECDD', padding: 5, borderRadius: 5 };
+        return { color: '#C25705', backgroundColor: 'rgba(255, 129, 26, 0.15)' };
       case "doing":
-        return { color: '#076A94', backgroundColor: '#D8F3FD', padding: 5, borderRadius: 5 };
+        return { color: '#076A94', backgroundColor: 'rgba(62, 195, 247, 0.2)' };
       case "done":
-        return { color: '#1A7526', backgroundColor: '#D7F2DB', padding: 5, borderRadius: 5 };
+        return { color: '#1A7526', backgroundColor: 'rgba(53, 189, 75, 0.2)' };
       default:
         return {};
     }
@@ -37,11 +38,16 @@ const ItemData = ({ item }: { item: DataType }) => {
 
   return (
     <View>
-      <View style={styles.container}>
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={['rgba(226, 240, 254, 0))', 'rgba(199, 223, 251, 0.21)']}
+        style={styles.container}
+      >
         <View style={styles.leftLine}></View>
-        <View style={{ gap: 8 }}>
+        <View style={styles.flexItem}>
           <View style={styles.row_between}>
-            <Text style={[getStatusStyle, styles.fontWeight800]}>{statusText}</Text>
+            <Text style={[getStatusStyle, styles.fontWeight400]}>{statusText}</Text>
             <TouchableOpacity onPress={onPressPinned}>
               <Image source={imageAssests.pushPin}
                 style={[styles.imgPin, { tintColor: pinColor }]} />
@@ -65,7 +71,7 @@ const ItemData = ({ item }: { item: DataType }) => {
               source={imageAssests.warning} />
           </View>
         </View>
-      </View>
+      </LinearGradient>
       <View style={styles.underline}></View>
     </View>
   )
@@ -76,14 +82,16 @@ export default ItemData
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    padding: 5,
-    paddingEnd: 10,
-    backgroundColor: "#F3F8FE"
+    paddingEnd: 12,
+    paddingStart: 2,
+    paddingVertical: 4,
+    borderRadius: 8,
+    height: "auto"
   },
   leftLine: {
     height: '100%',
-    width: 5,
-    marginEnd: 5,
+    width: 4,
+    marginEnd: 12,
     borderBottomLeftRadius: 8,
     borderTopLeftRadius: 8,
     backgroundColor: "#0375F4"
@@ -98,26 +106,32 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  fontWeight800: {
-    fontWeight: '800'
+  fontWeight400: {
+    fontWeight: '400',
+    fontFamily: 'LexendDeca_Regular',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 5
   },
   imgPin:
   {
     width: 20,
     height: 20,
     marginRight: 10,
-
   },
   textID:
   {
-    fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 14,
+    fontWeight: 600,
+    fontFamily: 'LexendDeca_SemiBold',
     color: "#003DA0"
   },
   textDeadline: {
     fontSize: 12,
     fontWeight: '500',
-    color: "#667085"
+    fontFamily: 'LexendDeca_Medium',
+    color: "#667085",
+
   },
   process: {
     height: 12,
@@ -127,11 +141,14 @@ const styles = StyleSheet.create({
   boldProcess: {
     height: "100%",
     borderRadius: 15,
-    paddingStart: 10
+    paddingStart: 10,
+    justifyContent: 'center'
   },
   textProcess: {
     color: "#fff",
-    fontSize: 8
+    fontSize: 8,
+    fontWeight: 400,
+    fontFamily: 'LexendDeca_Regular'
   },
   imgWarning: {
     width: 12,
@@ -143,6 +160,11 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#D0D5DD',
     marginVertical: 5
+  },
+  flexItem: {
+    gap: 8,
+    justifyContent: 'space-between',
+    flexDirection: 'column'
   }
 
 })

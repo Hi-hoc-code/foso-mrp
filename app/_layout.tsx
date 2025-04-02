@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import HomeScreen from '@/screen/homescreen/HomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -8,17 +8,21 @@ import Total from '@/screen/Total';
 import Order from '@/screen/Order';
 import Diagram from '@/screen/Diagram';
 import ShowMore from '@/screen/ShowMore';
-import { FontAwesome } from '@expo/vector-icons';
 import { imageAssests } from '@/assets/images/image';
+import { useFonts } from 'expo-font';
+import { fontType } from '@/assets/fonts/fontType';
 const Tab = createBottomTabNavigator();
 const _layout = () => {
+  const [loaded, error] = useFonts(fontType);
+  if (!loaded && !error) {
+    return null;
+  }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <StatusBar hidden={false} />
-
       <Tab.Navigator
+        initialRouteName="Lệnh SX"
         screenOptions={{ headerShown: false }}
-        initialRouteName='Lệnh SX'
       >
         <Tab.Screen
           name="Tổng quan"
@@ -27,11 +31,9 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.total}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? '#0375F3' : 'gray',
-                }}
+                style={[styles.tabBarStyle, {
+                  tintColor: focused ? '#0375F3' : '#9295A4',
+                }]}
               />
             ),
           }}
@@ -43,11 +45,9 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.order}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? '#0375F3' : 'gray',
-                }}
+                style={[styles.tabBarStyle, {
+                  tintColor: focused ? '#0375F3' : '#9295A4',
+                }]}
               />
             ),
           }}
@@ -59,13 +59,11 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.diagram}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? '#0375F3' : 'gray',
-                }}
+                style={[styles.tabBarStyle, {
+                  tintColor: focused ? '#0375F3' : '#9295A4',
+                }]}
               />
-            ),
+            ), 
           }}
         />
         <Tab.Screen
@@ -75,11 +73,9 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.list}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? '#0375F3' : 'gray',
-                }}
+                style={[styles.tabBarStyle, {
+                  tintColor: focused ? '#0375F3' : '#9295A4',
+                }]}
               />
             ),
           }}
@@ -91,20 +87,26 @@ const _layout = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={imageAssests.list}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? '#0375F3' : 'gray',
-                }}
+                style={[styles.tabBarStyle, {
+                  tintColor: focused ? '#0375F3' : '#9295A4',
+                }]}
               />
             ),
           }}
         />
       </Tab.Navigator>
-    </SafeAreaView>
+    </View>
   )
 }
 
 export default _layout
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    width: 24,
+    height: 24,
+    fontSize:12,
+    fontWeight: 400,
+    fontFamily:'LexendDeca_Regular'
+  }
+})

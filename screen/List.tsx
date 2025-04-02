@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import Header from './homescreen/components/Header';
+import { Text } from 'expo-dynamic-fonts';
 const List = () => {
   return (
     <View style={{ flex: 1 }}>
