@@ -3,11 +3,12 @@ import React from 'react'
 import { DataType } from '../useData'
 import { imageAssests } from '@/assets/images/image';
 import { LinearGradient } from 'expo-linear-gradient';
+import ProcessModal from './ProcessModal';
 
 const ItemData = ({ item, onTogglePinned }: { item: DataType, onTogglePinned: (id: string) => void }) => {
 
   const [isPinned, setIsPinned] = React.useState(false);
-
+  const [isVisibleDetail, setIsvisibleDetail] = React.useState(false);
   const getStatusStyle = React.useMemo(() => {
     switch (item.status) {
       case "not":
@@ -38,7 +39,10 @@ const ItemData = ({ item, onTogglePinned }: { item: DataType, onTogglePinned: (i
     setIsPinned(!isPinned)
     onTogglePinned(item.lsxId);
   };
-
+  const onVisibleProcess = () => {
+    setIsvisibleDetail(!isVisibleDetail)
+    console.log(isVisibleDetail)
+  }
   return (
     <View>
       <LinearGradient
@@ -69,15 +73,19 @@ const ItemData = ({ item, onTogglePinned }: { item: DataType, onTogglePinned: (i
                 <Text style={[styles.textProcess]}>60%</Text>
               </View>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={ onVisibleProcess}>
               <Image
                 style={[styles.imgWarning]}
                 source={imageAssests.warning} />
             </TouchableOpacity>
           </View>
+          <ProcessModal visibleProcessModal={isVisibleDetail} changeVisible={onVisibleProcess} />
         </View>
       </LinearGradient>
-      <View style={styles.underline}></View>
+
+      <View style={styles.underline}>
+
+      </View>
     </View>
   )
 }
@@ -127,7 +135,7 @@ const styles = StyleSheet.create({
   textID:
   {
     fontSize: 14,
-    fontWeight: 600,
+    fontWeight: '600',
     fontFamily: 'LexendDeca_SemiBold',
     color: "#003DA0"
   },
@@ -152,7 +160,7 @@ const styles = StyleSheet.create({
   textProcess: {
     color: "#fff",
     fontSize: 8,
-    fontWeight: 400,
+    fontWeight: '400',
     fontFamily: 'LexendDeca_Regular'
   },
   imgWarning: {

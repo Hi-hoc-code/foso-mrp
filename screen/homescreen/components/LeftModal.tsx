@@ -19,6 +19,7 @@ const LeftModal = (props: LeftModalProps) => {
   const [isDoingChecked, setIsDoingChecked] = React.useState(true);
   const [isDoneChecked, setIsDoneChecked] = React.useState(true);
   const [search, setSearch] = React.useState('');
+  const [isVisibleProcess, setIsVisibleProcess] = React.useState(false);
   const { listData } = useData()
   const [showStatus, setShowStatus] = React.useState(true);
   const rotation = useSharedValue(180)
@@ -205,13 +206,10 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     height: '100%',
-    width: '80%',
+    width: '75%',
     backgroundColor: 'white',
     paddingHorizontal: 10,
     paddingTop: 40
-  },
-  modalText: {
-
   },
   imgSearch: {
     width: 18,
@@ -224,7 +222,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: '600',
     color: "#25387A",
     fontFamily: 'LexendDeca_Medium',
   },
@@ -303,7 +301,7 @@ const styles = StyleSheet.create({
   inputSearch: {
     fontSize: 12,
     letterSpacing: 0.4,
-    fontWeight: 300,
+    fontWeight: '300',
     fontFamily: 'LexendDeca_Light',
     color: "#9295A4",
     flex: 1

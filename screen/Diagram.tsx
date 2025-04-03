@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import React, {  } from 'react';
 import Header from './homescreen/components/Header';
 
 const Diagram = () => {
@@ -8,9 +8,9 @@ const Diagram = () => {
     <View style={styles.flex1}>
       <Header imgLeft={null} title={"Sơ đồ Grantt"} imgRight={null} />
       <View style={styles.container}>
-       
+
       </View>
-    </View>
+    </View >
   );
 };
 
@@ -27,5 +27,5 @@ const styles = StyleSheet.create({
   flex1: {
     flex: 1,
     width: '100%',
-  }
+  },
 });
